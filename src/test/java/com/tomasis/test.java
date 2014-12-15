@@ -1,15 +1,15 @@
 package com.tomasis;
 
+import com.tomas.config.MyConst;
+import com.tomas.dao.DoubanDao;
 import com.tomas.dao.UserDao;
+import com.tomas.download.model.DoubanMovie;
 import com.tomas.download.model.User;
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.Reader;
 
 /**
@@ -29,7 +29,7 @@ public class test {
          */
         private static SqlSessionFactory getSessionFactory() {
             SqlSessionFactory sessionFactory = null;
-            String resource = "E:/workspace/TomasisBase/src/main/resources/configuration.xml";
+            String resource = MyConst.CONFIG_URI;
 
             try {
                 Reader reader = new FileReader(resource);
@@ -42,13 +42,26 @@ public class test {
         }
 
         public static void main(String[] args) {
-            String resource = "E:/workspace/TomasisBase/src/main/resources/configuration.xml";// path of the mybatis configuration file.
-            File file = new File(resource);
-            System.out.println(file.exists());
             SqlSession sqlSession = getSessionFactory().openSession();
-            UserDao userMapper = sqlSession.getMapper(UserDao.class);
-            User user = userMapper.findById(1);
-            System.out.println(user.getName());
+//            UserDao userMapper = sqlSession.getMapper(UserDao.class);
+//            User user = userMapper.findById(1);
+//            System.out.println(user.getName());
+            DoubanDao doubanDao = sqlSession.getMapper(DoubanDao.class);
+            DoubanMovie dbm = new DoubanMovie();
+            dbm.setDoubanId("11123423");
+            dbm.setImageUrl("wwww.wwwwwwwwww.com//shadkfhksh");
+            dbm.setInfo("123");
+            dbm.setRate(5.6);
+            dbm.setSummary("22222222");
+            dbm.setReviewCount(20000);
+            dbm.setTitle("haha");
+            dbm.setOriginalTitle("enen");
+            doubanDao.create(dbm);
+            sqlSession.commit();
+
+            //DoubanMovie dbm1 = doubanDao.findById(1);
+           // System.out.println(dbm1.getInfo());
+            sqlSession.close();
 
         }
 

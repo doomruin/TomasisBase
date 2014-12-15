@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->
+<mapper namespace="com.tomas.dao.DoubanDao">
+
+    <!--<resultMap type="doubanMovieMap" id="DoubanMovie">-->
+        <!--<id column="id" property="id" />-->
+        <!--<result column="add_time" property="addTime"/>-->
+        <!--<result column="emp_id" property="empId" />-->
+        <!--<result column="activity_id" property="activityId"/>-->
+        <!--<result column="flag" property="status"/>-->
+    <!--</resultMap>-->
+
+
+    <select id="findById" parameterType="HashMap" resultType="DoubanMovie">
+        select
+        * from DoubanMovie where id=1
+    </select>
+
+    <insert id="create" parameterType="DoubanMovie" >
+        insert into doubanmovie
+        (doubanId, rate, reviewCount, title, originalTitle, info, summary,imageUrl)
+        values
+        (#{doubanId},#{rate},#{reviewCount},#{title},#{originalTitle},#{info},#{summary},#{imageUrl});
+
+    </insert>
+
+    <insert id="insertDoubanId" parameterType="java.util.List" >
+        insert into doubanmovie
+        (doubanId)
+        values
+        <foreach collection="list" item="doubanId" index="index" separator="," >
+            (#{doubanId})
+        </foreach>
+
+    </insert>
+</mapper>

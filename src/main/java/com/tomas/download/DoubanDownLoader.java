@@ -12,7 +12,9 @@ import java.util.Set;
  * Created by Dreamwalker on 2014/11/11.
  */
 public class DoubanDownLoader {
-    Gson gson = new GsonBuilder().create();
-    List l = new ArrayList();
+    public static void main(String[] args) {
+     DoubanIdDLThead dbdl = new DoubanIdDLThead(2014);
+        dbdl.start();
+    }
 
 }
