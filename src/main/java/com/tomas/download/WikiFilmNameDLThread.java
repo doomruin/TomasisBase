@@ -27,10 +27,6 @@ public class WikiFilmNameDLThread extends Thread{
                 e.printStackTrace();
             }
         }
-        //////////////////////////////
-        //////////////////////////////
         //inserts();
-        //////////////////////////////
-        //////////////////////////////
     }
 }
